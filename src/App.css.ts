@@ -1,4 +1,4 @@
-import { createGlobalTheme } from "@vanilla-extract/css";
+import { createGlobalTheme, style } from "@vanilla-extract/css";
 
 export const vars = createGlobalTheme(":root", {
   color: {
@@ -18,11 +18,10 @@ export const vars = createGlobalTheme(":root", {
     deleteButton: "rgb(237,51,88)",
   },
   fontSizing: {
-    T1: "32px",
-    T2: "24px",
+    T1: "40px",
+    T2: "30px",
     T3: "18px",
-    T4: "14px",
-    P1: "12px",
+    T4: "14px"
   },
   spacing: {
     small: "5px",
@@ -38,6 +37,14 @@ export const vars = createGlobalTheme(":root", {
     basic: "4px spx 8px 0px rgba(34,60,80,0.2)",
   },
   minWidth: {
-    list: "250px",
+    list: "500px",
   },
+});
+
+export const appContainer = style({
+  width: "100%",
+  height: "100vh", // Ensure the container takes the full height of the viewport
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center", // Center the content horizontally and vertically
 });

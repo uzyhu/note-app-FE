@@ -1,12 +1,12 @@
+import { appContainer } from "./App.css";
 import Note from "./components/Note/Note";
 import TopContainer from "./components/TopContainer/TopContainer";
 
 function App() {
   return (
-    <>
-      {/* <Note />
-      <TopContainer></TopContainer> */}
-    </>
+    <div className={appContainer}>
+      <Note></Note>
+    </div>
   );
 }
 

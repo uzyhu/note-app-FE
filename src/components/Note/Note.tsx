@@ -1,9 +1,22 @@
 import React, { ChangeEvent, useEffect, useState } from "react";
 import axios from "axios";
+import {
+  addButton,
+  deleteButton,
+  header,
+  noteContainer,
+  noteContent,
+  noteItemContainer,
+  noteTitle,
+  title,
+} from "./Note.css";
+import { FaRegCalendarPlus } from "react-icons/fa";
 
 interface Note {
   id: number;
   title: string;
+  content: string;
+  updatedAt: string;
 }
 
 const Note: React.FC = () => {
@@ -22,11 +35,20 @@ const Note: React.FC = () => {
   }, []);
 
   return (
-    <div>
-      <h1>Note List</h1>
+    <div className={noteContainer}>
+      <div className={header}>
+        <h1 className={title}>Note List</h1>
+        <FaRegCalendarPlus className={addButton}/>
+      </div>
       <ul>
         {notes.map((note) => (
-          <li key={note.id}>{note.title}</li>
+          <div className={noteItemContainer} key={note.id}>
+            <div>
+            <span className={noteTitle}>{note.title}</span>
+            <div className={noteContent}>{note.updatedAt}</div>
+            </div>
+            <button className={deleteButton}>DELETE</button>
+          </div>
         ))}
       </ul>
     </div>
