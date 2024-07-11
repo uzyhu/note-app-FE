@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import axios from "axios";
 import {
   addButton,
@@ -18,7 +18,7 @@ import { INote } from "../../types";
 const Note: React.FC = () => {
   const dispatch = useTypedDispatch();
   const notes = useTypedSelector((state) => state.note.noteArray);
-  
+
   const fetchNotes = async () => {
     try {
       const response = await axios.get("/notes");
@@ -59,6 +59,11 @@ const Note: React.FC = () => {
     dispatch(setModalActive(true));
   };
 
+  const handleInsert = () => {
+    dispatch(setSelectedNote(null));
+    dispatch(setModalActive(true));
+  };
+
   useEffect(() => {
     fetchNotes();
   }, []);
@@ -67,7 +72,7 @@ const Note: React.FC = () => {
     <div className={noteContainer}>
       <div className={header}>
         <h1 className={title}>Note List</h1>
-        <FaRegCalendarPlus className={addButton} />
+        <FaRegCalendarPlus className={addButton} onClick={handleInsert} />
       </div>
       <ul>
         {notes.map((note) => (

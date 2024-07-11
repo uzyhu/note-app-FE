@@ -9,15 +9,7 @@ type TContainerState = {
 
 const initialState: TContainerState = {
   modalActive: false,
-  noteArray: [
-    {
-      noteId: 1,
-      noteTitle: "메모1",
-      noteContent: "메모입니다",
-      noteCreatedAt: new Date().toISOString(),
-      noteUpdatedAt: new Date().toISOString(),
-    },
-  ],
+  noteArray: [],
   selectedNote: null,
 };
 
@@ -43,11 +35,12 @@ const noteSlice = createSlice({
     },
     updateNoteContent: (
       state,
-      { payload }: PayloadAction<{ noteId: number; content: string }>
+      { payload }: PayloadAction<{ noteId: number; title: string; content: string }>
     ) => {
-      const { noteId, content } = payload;
+      const { noteId, title, content } = payload;
       const note = state.noteArray.find((n) => n.noteId === noteId);
       if (note) {
+        note.noteTitle = title;
         note.noteContent = content;
         note.noteUpdatedAt = formatDate(new Date().toISOString());
       }
@@ -55,8 +48,11 @@ const noteSlice = createSlice({
     updateNoteArray: (state, { payload }: PayloadAction<INote[]>) => {
       state.noteArray = payload;
     },
+    addNote: (state, { payload }: PayloadAction<INote>) => {
+      state.noteArray.push(payload);
+    },
   },
 });
 
-export const { setModalActive, setSelectedNote, updateNoteContent, updateNoteArray } = noteSlice.actions;
+export const { setModalActive, setSelectedNote, updateNoteContent, updateNoteArray, addNote } = noteSlice.actions;
 export const noteReducer = noteSlice.reducer;
