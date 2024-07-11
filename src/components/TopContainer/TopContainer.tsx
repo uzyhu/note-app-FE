@@ -3,11 +3,13 @@ import { FiPlusCircle } from "react-icons/fi";
 import { addButton, container } from "./TopContainer.css";
 
 const TopContainer = () => {
-  const handleClick = () => {};
-  console.log("in - topcontainer.tsx");
+  const handleClick = () => {
+    
+  };
+
   return (
     <div>
-      <FiPlusCircle></FiPlusCircle>
+      <FiPlusCircle onClick={handleClick}></FiPlusCircle>
     </div>
   );
 };
