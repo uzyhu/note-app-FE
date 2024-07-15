@@ -11,6 +11,7 @@ import axios from "axios";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import { MdOutlineClose } from "react-icons/md";
+import { Chip } from "@mui/material";
 
 const CreateModal: React.FC = () => {
   const dispatch = useTypedDispatch();
@@ -24,7 +25,7 @@ const CreateModal: React.FC = () => {
       setTitle(selectedNote.noteTitle || "");
       setContent(selectedNote.noteContent || "");
       if (selectedNote.noteUpdatedAt) {
-        setUpdatedAtDisplay(formatDate(selectedNote.noteUpdatedAt));
+        setUpdatedAtDisplay("Updated At : "+formatDate(selectedNote.noteUpdatedAt));
       }
     } else {
       setTitle("");
@@ -158,7 +159,7 @@ const CreateModal: React.FC = () => {
           </div>
         </Box>
         {/* Display updatedAt only if selectedNote and updatedAtDisplay are defined */}
-        {updatedAtDisplay && <div>Updated At: {updatedAtDisplay}</div>}
+        <Chip label={updatedAtDisplay} variant="outlined"/>
       </div>
     </div>
   );

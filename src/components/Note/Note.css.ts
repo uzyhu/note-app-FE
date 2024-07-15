@@ -6,7 +6,7 @@ export const noteContainer = style({
   flexDirection: "column",
   padding: vars.spacing.big2,
   minWidth: vars.minWidth.list,
-  width: "50%", // Make it take the full width
+  width: "40%", // Make it take the full width
   height: "90%", // Make it take the full height
   borderRadius: 10,
   backgroundColor: vars.color.list,
