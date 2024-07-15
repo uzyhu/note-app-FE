@@ -8,6 +8,8 @@ import {
 } from "../../store/slices/noteSlice";
 import { modalContainer, modalContent, closeButton } from "./CreateModal.css";
 import axios from "axios";
+import Box from "@mui/material/Box";
+import TextField from "@mui/material/TextField";
 
 const CreateModal: React.FC = () => {
   const dispatch = useTypedDispatch();
@@ -39,41 +41,52 @@ const CreateModal: React.FC = () => {
   const saveContent = async () => {
     const updatedAt = new Date().toISOString();
     if (selectedNote) {
-      try {
-        await axios.put(`/notes/${selectedNote.noteId}`, {
-          title,
-          content,
-          updatedAt,
-        });
-        dispatch(
-          updateNoteContent({ noteId: selectedNote.noteId, title, content })
-        );
-        setUpdatedAtDisplay(formatDate(updatedAt)); // Update updatedAtDisplay after update
-      } catch (error) {
-        console.error("There was an error updating the note!", error);
+      if (
+        selectedNote.noteTitle == title &&
+        selectedNote.noteContent == content
+      ) {
+        console.log("바뀐 내용 없음");
+      } else {
+        try {
+          await axios.put(`/notes/${selectedNote.noteId}`, {
+            title,
+            content,
+            updatedAt,
+          });
+          dispatch(
+            updateNoteContent({ noteId: selectedNote.noteId, title, content })
+          );
+          setUpdatedAtDisplay(formatDate(updatedAt)); // Update updatedAtDisplay after update
+        } catch (error) {
+          console.error("There was an error updating the note!", error);
+        }
       }
     } else {
-      // Adding a new note
-      try {
-        const response = await axios.post("/notes", {
-          title,
-          content,
-          createdAt: updatedAt,
-          updatedAt,
-        });
-        const newNote = response.data;
-        dispatch(
-          addNote({
-            noteId: newNote.id,
-            noteTitle: newNote.title,
-            noteContent: newNote.content,
-            noteCreatedAt: formatDate(newNote.createdAt),
-            noteUpdatedAt: formatDate(newNote.updatedAt),
-          })
-        );
-        setUpdatedAtDisplay(formatDate(updatedAt)); // Update updatedAtDisplay after add
-      } catch (error) {
-        console.error("There was an error creating the note!", error);
+      if (!title && !content) {
+        console.log("추가될 내용 없음");
+      } else {
+        // Adding a new note
+        try {
+          const response = await axios.post("/notes", {
+            title,
+            content,
+            createdAt: updatedAt,
+            updatedAt,
+          });
+          const newNote = response.data;
+          dispatch(
+            addNote({
+              noteId: newNote.id,
+              noteTitle: newNote.title,
+              noteContent: newNote.content,
+              noteCreatedAt: formatDate(newNote.createdAt),
+              noteUpdatedAt: formatDate(newNote.updatedAt),
+            })
+          );
+          setUpdatedAtDisplay(formatDate(updatedAt)); // Update updatedAtDisplay after add
+        } catch (error) {
+          console.error("There was an error creating the note!", error);
+        }
       }
     }
   };
@@ -99,12 +112,24 @@ const CreateModal: React.FC = () => {
           &times;
         </button>
         <h2>{selectedNote ? "Edit Note" : "Create Note"}</h2>
-        <input
-          type="text"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-          placeholder="Title"
-        />
+        <Box
+          component="form"
+          sx={{
+            "& .MuiTextField-root": { m: 0, width: "20ch", marginTop: 0.5, marginBottom: 0.5},
+          }}
+          noValidate
+          autoComplete="off"
+        >
+          <div>
+            <TextField
+              label="Title"
+              id="outlined-size-small"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+              size="small"
+            />
+          </div>
+        </Box>
         <textarea
           value={content}
           onChange={(e) => setContent(e.target.value)}
