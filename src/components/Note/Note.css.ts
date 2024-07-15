@@ -75,3 +75,11 @@ export const addButton = style({
     transform: "scale(1.03)",
   },
 });
+
+export const searchInput = style({
+  padding: vars.spacing.small,
+  borderRadius: 5,
+  border: `1px solid ${vars.color.secondaryDarkText}`,
+  marginLeft: "auto",
+  fontSize: vars.fontSizing.T3,
+});
