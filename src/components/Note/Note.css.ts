@@ -7,15 +7,15 @@ export const noteContainer = style({
   padding: vars.spacing.big2,
   minWidth: vars.minWidth.list,
   width: "50%", // Make it take the full width
-  height: "100%", // Make it take the full height
+  height: "90%", // Make it take the full height
   borderRadius: 10,
   backgroundColor: vars.color.list,
   overflowY: "auto", // Add scrollbar for overflow content
 });
 
 export const title = style({
-  fontSize: vars.fontSizing.T1,
-  marginBottom: vars.spacing.big2,
+  fontSize: vars.fontSizing.T2,
+  marginBottom: vars.spacing.small,
 });
 
 export const header = style({

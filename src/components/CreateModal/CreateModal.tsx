@@ -10,6 +10,7 @@ import { modalContainer, modalContent, closeButton } from "./CreateModal.css";
 import axios from "axios";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
+import { MdOutlineClose } from "react-icons/md";
 
 const CreateModal: React.FC = () => {
   const dispatch = useTypedDispatch();
@@ -108,14 +109,17 @@ const CreateModal: React.FC = () => {
   return (
     <div className={modalContainer} onClick={handleClose}>
       <div className={modalContent} onClick={(e) => e.stopPropagation()}>
-        <button className={closeButton} onClick={handleClose}>
-          &times;
-        </button>
+        <MdOutlineClose className={closeButton} onClick={handleClose} />
         <h2>{selectedNote ? "Edit Note" : "Create Note"}</h2>
         <Box
           component="form"
           sx={{
-            "& .MuiTextField-root": { m: 0, width: "20ch", marginTop: 0.5, marginBottom: 0.5},
+            "& .MuiTextField-root": {
+              m: 0,
+              width: "45.5ch",
+              marginTop: 1,
+              marginBottom: 1,
+            },
           }}
           noValidate
           autoComplete="off"
@@ -123,20 +127,36 @@ const CreateModal: React.FC = () => {
           <div>
             <TextField
               label="Title"
-              id="outlined-size-small"
+              id="filled-multiline-flexible"
               value={title}
+              multiline
               onChange={(e) => setTitle(e.target.value)}
               size="small"
+              variant="filled"
+              autoFocus
             />
           </div>
         </Box>
-        <textarea
-          value={content}
-          onChange={(e) => setContent(e.target.value)}
-          rows={10}
-          cols={50}
-          autoFocus
-        />
+        <Box
+          component="form"
+          sx={{
+            "& .MuiTextField-root": { width: "45.5ch", marginBottom: 1 },
+          }}
+          noValidate
+          autoComplete="off"
+        >
+          <div>
+            <TextField
+              id="filled-multiline-static"
+              label="Content"
+              multiline
+              rows={4}
+              variant="filled"
+              value={content}
+              onChange={(e) => setContent(e.target.value)}
+            />
+          </div>
+        </Box>
         {/* Display updatedAt only if selectedNote and updatedAtDisplay are defined */}
         {updatedAtDisplay && <div>Updated At: {updatedAtDisplay}</div>}
       </div>

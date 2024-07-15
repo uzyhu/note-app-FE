@@ -81,7 +81,7 @@ const Note: React.FC = () => {
   return (
     <div className={noteContainer}>
       <div className={header}>
-        <h1 className={title}>Note List</h1>
+        <h1 className={title}>MEMO APP</h1>
         <input
           type="text"
           placeholder="Search notes..."

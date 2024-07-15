@@ -19,7 +19,7 @@ export const vars = createGlobalTheme(":root", {
   },
   fontSizing: {
     T1: "40px",
-    T2: "30px",
+    T2: "35px",
     T3: "18px",
     T4: "14px"
   },
@@ -47,4 +47,5 @@ export const appContainer = style({
   display: "flex",
   justifyContent: "center",
   alignItems: "center", // Center the content horizontally and vertically
+  backgroundColor: "#808080"
 });
