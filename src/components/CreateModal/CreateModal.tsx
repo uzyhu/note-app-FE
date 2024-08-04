@@ -159,7 +159,8 @@ const CreateModal: React.FC = () => {
           </div>
         </Box>
         {/* Display updatedAt only if selectedNote and updatedAtDisplay are defined */}
-        <Chip label={updatedAtDisplay} variant="outlined"/>
+        <>{selectedNote ?  <Chip label={updatedAtDisplay} variant="outlined"/> : <></>}</>
+        {/* <Chip label={updatedAtDisplay} variant="outlined"/> */}
       </div>
     </div>
   );
