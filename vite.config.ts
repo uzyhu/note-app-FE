@@ -10,7 +10,7 @@ export default defineConfig({
     proxy: {
       "/notes": {
         target: "http://localhost:3002",
-        changeOrigin: true,
+        changeOrigin: true, 
       },
     },
   },
